@@ -1,17 +1,13 @@
 {
-  "version": 2,
-  "cleanUrls": true,
-  "builds": [
-    { "src": "frontend/**", "use": "@vercel/static" },
-    { "src": "api/**/*.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/",              "dest": "/frontend/html/search.html" },
-
-    { "src": "/api/(.*)",      "dest": "/api/$1" },
-
-    { "src": "/reset-password","dest": "/frontend/reset-password.html" },
-
-    { "src": "/(.*)",          "dest": "/frontend/html/$1" }
-  ]
-}
+    "cleanUrls": true,
+    "builds": [
+      { "src": "frontend/**", "use": "@vercel/static" },
+      { "src": "api/**/*.js", "use": "@vercel/node" }
+    ],
+    "rewrites": [
+      { "source": "/",           "destination": "/frontend/html/search.html" },
+      { "source": "/api/(.*)", "destination": "/api/$1" },
+      { "source": "/reset-password", "destination": "/frontend/reset-password.html" },
+      { "source": "/(.*)", "destination": "/frontend/html/$1" }
+    ]
+  }
