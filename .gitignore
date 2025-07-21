@@ -1,0 +1,39 @@
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+.venv/
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# Log files
+*.log
+
+# Ignore private files
+.env
+backend/.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE/project files
+.vscode/
+*.code-workspace
+.vercel
+
+#Obsolete files
+Obsolete/
+
+#Downloads
+Downloads/
+.Downloads/
+backend/Downloads
+
+node_modules/
