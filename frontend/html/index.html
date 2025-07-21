@@ -3,207 +3,323 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work Safety Index - Search</title>
+  <title>Work Safety Index - Workplace Safety Intelligence</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="frontend/style.css" />
 </head>
-<body class="bg-gray-100 font-sans">
-  <!-- ░░ Header ░░ -->
-  <header class="bg-white border-b border-gray-200">
+<body class="bg-gray-50 font-sans">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center">
-          <svg class="w-8 h-8 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 000-2H3zm3 2a1 1 0 011-1h8a1 1 0 110 2H7a1 1 0 01-1-1zm0 4a1 1 0 011-1h5a1 1 0 110 2H7a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+          <svg class="w-8 h-8 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 000-2H3zm3 2a1 1 0 011-1h8a1 1 0 110 2H7a1 1 0 01-1-1zm0 4a1 1 0 011-1h5a1 1 0 110 2H7a1 1 0 01-1-1z" clip-rule="evenodd"/>
+          </svg>
           <span class="font-semibold text-xl text-gray-800">Work Safety Index</span>
         </div>
         <nav class="hidden md:flex items-center space-x-6">
-          <a href="#" class="text-gray-600 hover:text-gray-900">Blog</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Upgrade</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Login</a>
-          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Signup</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Blog</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">About</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Upgrade</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Login</a>
+          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">Signup</a>
         </nav>
         <div class="md:hidden">
           <button class="text-gray-600 hover:text-gray-900">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </header>
 
-  <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <div class="lg:flex lg:gap-x-8">
-      <!-- ░░ Sidebar / Filters ░░ -->
-      <aside class="lg:w-1/4 space-y-6 mb-8 lg:mb-0 h-fit">
-        <div class="bg-white p-6 rounded-lg shadow">
-          <!-- Filters heading -->
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-semibold text-gray-800 flex items-center">
-              <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"/></svg>
-              Filters
-            </h2>
-          </div>
-
-          <button id="clearFiltersButton"
-                  class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md text-sm mb-6">
-            Clear&nbsp;(0)
-          </button>
-
-          <!-- Data Availability -->
-          <div class="mb-6">
-            <h3 class="text-sm font-semibold text-gray-700 mb-3">Data Availability</h3>
-
-            <label class="flex items-center space-x-2 text-gray-700 text-sm mb-2">
-              <input id="filterMostRecentYear" type="checkbox"
-                     class="filter-checkbox form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded"
-                     checked />
-              <span>Most Recent Year</span>
-            </label>
-
-            <label class="flex items-center space-x-2 text-gray-700 text-sm">
-              <input id="filterIncidentsDetails" type="checkbox"
-                     class="filter-checkbox form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded" />
-              <span>Incidents Details</span>
-            </label>
-          </div>
-
-          <!-- Company Info -->
-          <div class="mb-6 border-t border-gray-200 pt-4">
-            <button id="companyInfoToggle"
-                    class="collapsible-trigger flex justify-between items-center w-full text-left py-1">
-              <span class="text-sm font-semibold text-gray-700">Company Info</span>
-              <svg id="companyInfoArrow"
-                   class="w-4 h-4 text-gray-500 transform transition-transform duration-200"
-                   fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-
-            <div id="companyInfoContent" class="mt-3 space-y-4 hidden">
-              <!-- Industry -->
-              <div>
-                <label for="filterIndustry" class="block text-xs font-medium text-gray-500 mb-1">
-                  Industry&nbsp;(NAICS&nbsp;Sector)
-                </label>
-                <select id="filterIndustry"
-                        class="filter-input form-select block w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <option value="">All Industries</option>
-                </select>
-              </div>
-
-              <!-- Employees range - stacked on mobile -->
-              <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">
-                  Employees&nbsp;(Annual&nbsp;Average)
-                </label>
-                <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-                  <input id="filterEmployeesMin" type="number" placeholder="Min"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <input id="filterEmployeesMax" type="number" placeholder="Max"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                </div>
-              </div>
+  <!-- Hero Section -->
+  <section class="hero-gradient text-white py-20 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center animate-fade-in">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          Workplace Safety <br/>
+          <span class="text-blue-200">Intelligence</span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+          Research company safety performance, OSHA records, and incident data to make informed decisions about workplace safety.
+        </p>
+        
+        <!-- Main Search Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg class="w-6 h-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <input type="search" id="heroSearch"
+                   class="block w-full pl-12 pr-32 py-4 text-lg border-0 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:ring-4 focus:ring-blue-300 focus:outline-none shadow-xl"
+                   placeholder="Search companies, establishments..." />
+            <div class="absolute inset-y-0 right-0 flex items-center">
+              <button id="heroSearchButton"
+                      class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-r-lg text-lg font-medium transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Search
+              </button>
             </div>
           </div>
+        </div>
 
-          <!-- Safety Score -->
-          <div class="mb-6 border-t border-gray-200 pt-4">
-            <button id="safetyToggle"
-                    class="collapsible-trigger flex justify-between items-center w-full text-left py-1" aria-expanded="true">
-              <span class="text-sm font-semibold text-gray-700">Safety Score</span>
-              <svg id="safetyArrow"
-              class="w-4 h-4 text-gray-500 transform rotate-180 transition-transform duration-200"
-              fill="none"
-                   fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
+        <p class="text-blue-200 text-sm">
+          Try searching: "Amazon", "Tesla", "Construction", or any company name
+        </p>
+      </div>
+    </div>
+  </section>
 
-            <div id="safetyContent" class="mt-3 space-y-4">
-              <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">
-                  Score&nbsp;Range&nbsp;(0-100)
-                </label>
-                <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-                  <input id="filterSafetyMin" type="number" min="0" max="100" placeholder="Min"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <input id="filterSafetyMax" type="number" min="0" max="100" placeholder="Max"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- Stats Section -->
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="stats-counter text-4xl font-bold text-blue-600 mb-2">500K+</div>
+          <p class="text-gray-600">Companies Tracked</p>
+        </div>
+        <div class="text-center">
+          <div class="stats-counter text-4xl font-bold text-blue-600 mb-2">2M+</div>
+          <p class="text-gray-600">Safety Records</p>
+        </div>
+        <div class="text-center">
+          <div class="stats-counter text-4xl font-bold text-blue-600 mb-2">50</div>
+          <p class="text-gray-600">States Covered</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <!-- Location -->
-          <div class="border-t border-gray-200 pt-4">
-            <button id="locationToggle"
-                    class="collapsible-trigger flex justify-between items-center w-full text-left py-1">
-              <span class="text-sm font-semibold text-gray-700">Location</span>
-              <svg id="locationArrow"
-                   class="w-4 h-4 text-gray-500 transform transition-transform duration-200"
-                   fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
+  <!-- Features Section -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Why Work Safety Index?
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Make data-driven decisions about workplace safety with comprehensive OSHA data and safety analytics.
+        </p>
+      </div>
 
-            <div id="locationContent" class="mt-3 space-y-4 hidden">
-              <div>
-                <label for="filterState" class="block text-xs font-medium text-gray-500 mb-1">State</label>
-                <select id="filterState"
-                        class="filter-input form-select block w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <option value="">All States</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="filterZip" class="block text-xs font-medium text-gray-500 mb-1">Zip&nbsp;Code</label>
-                <input id="filterZip" type="text" maxlength="5" placeholder="Enter Zip Code"
-                       class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-              </div>
-            </div>
-          </div>
-        </div><!-- /white card -->
-      </aside>
-
-      <!-- ░░ Main results column ░░ -->
-      <main class="lg:w-3/4 space-y-6">
-        <!-- Search bar -->
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="feature-card bg-white p-8 rounded-xl shadow-md">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <input id="searchInput" type="search"
-                 class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md bg-white placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                 placeholder="Search company or establishment name..." />
-        </div>
-
-        <!-- Sort + results-count -->
-        <div class="flex flex-col sm:flex-row justify-between items-center">
-          <p class="text-sm text-gray-700 mb-2 sm:mb-0">
-            Search results for <strong id="searchTermDisplay" class="text-gray-900"></strong>
-            (<span id="resultsCount">0</span>)
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">OSHA Data Integration</h3>
+          <p class="text-gray-600">
+            Access comprehensive OSHA injury and illness records, inspection data, and violation histories for informed decision-making.
           </p>
-          <div class="flex items-center space-x-2">
-            <span class="text-sm text-gray-600">Sort by</span>
-            <button data-sort="relevance"
-                    class="sort-button bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm font-medium">
-              Relevance
-            </button>
-            <button data-sort="safety_score"
-                    class="sort-button bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1.5 rounded-md text-sm font-medium">
-              SafetyScore
-            </button>
-            <button data-sort="year_filing_for.desc"
-                    class="sort-button bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1.5 rounded-md text-sm font-medium">
-              Year
-            </button>
-          </div>
         </div>
 
-        <!-- Results container -->
-        <div id="resultsContainer" class="space-y-4"></div>
-      </main>
-    </div>
-  </div>
+        <!-- Feature 2 -->
+        <div class="feature-card bg-white p-8 rounded-xl shadow-md">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Safety Scoring</h3>
+          <p class="text-gray-600">
+            Our proprietary safety scoring system helps you quickly identify and compare workplace safety performance across industries.
+          </p>
+        </div>
 
-  <script src="frontend/js/search.js"></script>
+        <!-- Feature 3 -->
+        <div class="feature-card bg-white p-8 rounded-xl shadow-md">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Search</h3>
+          <p class="text-gray-600">
+            Filter by industry, location, company size, and safety metrics to find exactly what you're looking for in seconds.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Preview Section -->
+  <section class="bg-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Start Your Safety Research
+        </h2>
+        <p class="text-xl text-gray-600">
+          Get instant access to workplace safety data and make informed decisions.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="search-preview rounded-xl p-12 text-center cursor-pointer" onclick="goToSearch()">
+          <div class="mb-6">
+            <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-700 mb-4">Ready to Search?</h3>
+          <p class="text-gray-600 mb-6">
+            Click here to access our full search interface with advanced filtering and detailed company profiles.
+          </p>
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors">
+            Go to Search →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Who Uses Work Safety Index?
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">HR Professionals</h3>
+          <p class="text-sm text-gray-600">Research potential employers and benchmark safety performance</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Safety Managers</h3>
+          <p class="text-sm text-gray-600">Industry benchmarking and competitive safety analysis</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Researchers</h3>
+          <p class="text-sm text-gray-600">Academic research and workplace safety trend analysis</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 112 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900 mb-2">Job Seekers</h3>
+          <p class="text-sm text-gray-600">Evaluate workplace safety before accepting job offers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-blue-600 py-16">
+    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        Ready to Research Workplace Safety?
+      </h2>
+      <p class="text-xl text-blue-100 mb-8">
+        Join thousands of professionals who trust Work Safety Index for their safety intelligence needs.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="performSearch()" class="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-medium hover:bg-gray-50 transition-colors">
+          Start Searching
+        </button>
+        <button class="border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-white hover:text-blue-600 transition-colors">
+          Learn More
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <svg class="w-8 h-8 text-blue-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 000-2H3zm3 2a1 1 0 011-1h8a1 1 0 110 2H7a1 1 0 01-1-1zm0 4a1 1 0 011-1h5a1 1 0 110 2H7a1 1 0 01-1-1z" clip-rule="evenodd"/>
+            </svg>
+            <span class="font-semibold text-xl text-white">Work Safety Index</span>
+          </div>
+          <p class="text-sm">
+            Empowering safer workplaces through data-driven safety intelligence and OSHA record transparency.
+          </p>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold text-white mb-4">Product</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">Search</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">API</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Enterprise</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold text-white mb-4">Company</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold text-white mb-4">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Data Sources</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <p class="text-sm">© 2025 Work Safety Index. All rights reserved.</p>
+        <div class="flex space-x-4 mt-4 sm:mt-0">
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="frontend/js/index.js" defer></script>
 </body>
 </html>
