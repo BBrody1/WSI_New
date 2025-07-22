@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sortButtons            = document.querySelectorAll('.sort-button');
   const collapsibleTriggers    = document.querySelectorAll('.collapsible-trigger');
   const filterToggleBtn = document.getElementById('filterToggleBtn');
-const filterPanel    = document.getElementById('filterPanel');
+const filterPanel    = document.getElementById('filtersPanel');
 const mobileFilterCount  = document.getElementById('mobileFilterCount');
 const mobileClearFilters = document.getElementById('mobileClearFilters');
 
@@ -328,7 +328,7 @@ if (safetyMax) f.safetyMax = safetyMax;
     });
   
     updateClearButtonCount();
-    resetUI();          // <— here
+    resetUI();          
   
     suppressSearch = false;
   });
