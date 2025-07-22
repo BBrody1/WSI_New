@@ -47,7 +47,8 @@ module.exports = async (req, res) => {
        dart_rate,
        trir,
        severity_rate,
-       safety_score`,
+       safety_score,
+       state`,
       { count: 'exact' }
     ) .eq('is_latest', true);;
 
@@ -76,12 +77,10 @@ module.exports = async (req, res) => {
     }
 
     if (state) {
-        // Add `state` to the materialized view if needed
         query = query.eq('state', state.toUpperCase());
     }
 
     if (zip) {
-        // Optional: requires zip in company view or joined lookup
         query = query.eq('zip_code', zip.trim());
     }
 

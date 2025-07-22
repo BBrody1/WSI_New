@@ -84,7 +84,7 @@ function getQueryParam(name) {
   
     const viewAllBtn = document.getElementById('viewAllLocationsBtn');
     if (viewAllBtn) {
-      viewAllBtn.href = `/locations?ein=${encodeURIComponent(ein)}`;
+      viewAllBtn.href = `/locationsAll?ein=${encodeURIComponent(ein)}`;
     }
   
     try {

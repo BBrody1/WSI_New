@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('viewAllLocationsBtn')?.addEventListener('click', function(e) {
         e.preventDefault();
         const einParam = getQueryParam('ein'); // ensure scope
-        window.location.href = `/locations?ein=${encodeURIComponent(einParam)}`;
+        window.location.href = `/locationsAll?ein=${encodeURIComponent(einParam)}`;
     });
 });
 

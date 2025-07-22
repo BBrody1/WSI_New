@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterInputs           = document.querySelectorAll('.filter-input, .filter-checkbox');
   const sortButtons            = document.querySelectorAll('.sort-button');
   const collapsibleTriggers    = document.querySelectorAll('.collapsible-trigger');
+  const filterToggleBtn = document.getElementById('filterToggleBtn');
+const filterPanel    = document.getElementById('filterPanel');
+const mobileFilterCount  = document.getElementById('mobileFilterCount');
+const mobileClearFilters = document.getElementById('mobileClearFilters');
 
   /* ---------- Constants ---------- */
   const API_ENDPOINT    = '/api/search';
@@ -20,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let debounceTimer;
   let currentSortBy     = 'relevance';
   let currentPage       = 0;
+  let suppressSearch = false;
 
   /* ---------- Helpers ---------- */
   function hasActiveCriteria(filters) {
@@ -76,7 +81,14 @@ if (safetyMax) f.safetyMax = safetyMax;
     });
     if (!document.getElementById('filterMostRecentYear').checked) cnt++;
 
-    clearFiltersButton.textContent = `Clear (${cnt})`;
+  }
+
+  function resetUI() {
+    resultsContainer.innerHTML =
+      '<p class="text-gray-500 text-center">Enter a search term or apply filters to see results.</p>';
+    resultsCountDisplay.textContent = '0';
+    searchTermDisplay.textContent = '';
+    currentPage = 0;
   }
 
   /* ---------- Core search ---------- */
@@ -236,13 +248,43 @@ if (safetyMax) f.safetyMax = safetyMax;
   /* ---------- Listeners ---------- */
   searchInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
+  
+    const val = searchInput.value.trim();
+    const f   = getActiveFilters();
+    const otherActive = !!(
+      f.industry || f.employeesMin || f.employeesMax ||
+      f.state || f.zip || f.safetyMin || f.safetyMax ||
+      f.mostRecentYear === false
+    );
+  
+    if (!val && !otherActive) {
+      resetUI();
+      return;
+    }
+  
     debounceTimer = setTimeout(() => performSearch(0), 500);
   });
 
   filterInputs.forEach(inp => {
-    inp.addEventListener('change', () => performSearch(0));
+    inp.addEventListener('change', () => {
+      if (suppressSearch) return;
+      if (inp.id === 'filterMostRecentYear') {
+        const f = getActiveFilters();    
+        const otherActive = !!(
+          f.term ||
+          f.industry || f.employeesMin || f.employeesMax ||
+          f.state   || f.zip ||
+          f.safetyMin || f.safetyMax
+        );
+        if (!otherActive) return;           
+      }
+  
+      performSearch(0);
+    });
+  
     if (inp.type === 'text' || inp.type === 'number') {
       inp.addEventListener('input', () => {
+        if (suppressSearch) return;
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => performSearch(0), 700);
       });
@@ -274,16 +316,35 @@ if (safetyMax) f.safetyMax = safetyMax;
   });
 
   clearFiltersButton.addEventListener('click', () => {
+    suppressSearch = true;
+  
     searchInput.value = '';
     document.querySelectorAll('.filter-input').forEach(inp => {
       if (inp.type === 'checkbox') {
-        inp.checked = (inp.id === 'filterMostRecentYear'); // default state
+        inp.checked = (inp.id === 'filterMostRecentYear');
       } else {
         inp.value = '';
       }
     });
-    performSearch(0);
+  
+    updateClearButtonCount();
+    resetUI();          // <— here
+  
+    suppressSearch = false;
   });
+
+// Mobile filter toggle
+if (filterToggleBtn && filtersPanel) {
+    filterToggleBtn.addEventListener('click', () => {
+      const isHidden = filtersPanel.classList.toggle('hidden');
+      if (!isHidden) {
+        filterPanel.classList.add('block'); 
+      } else {
+        filterPanel.classList.remove('block');
+      }
+      filterToggleBtn.setAttribute('aria-expanded', String(!isHidden));
+    });
+  }
 
   /* ---------- Init ---------- */
   fetchInitialFilterData();

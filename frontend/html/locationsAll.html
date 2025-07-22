@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Locations – Work Safety Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div id="siteHeader"></div>
+
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-900" id="pageTitle">Locations</h1>
+            <p class="text-sm text-gray-500 mt-1" id="pageSubtitle">All locations for <span id="companyName" class="font-semibold">your company</span></p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="locationsLoading" class="text-center text-gray-500 py-10">
+            <p>Loading all locations...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="locationsError" class="text-center text-red-500 py-10 hidden"></div>
+        
+        <!-- Locations Grid -->
+        <div id="locationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Location cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="text-center text-gray-500 py-10 hidden">
+            <p>No locations found for this company.</p>
+        </div>
+
+    </div>
+
+    <script src="frontend/js/locationsAll.js"></script>
+    <script>
+        // Fetch and inject the header, then load its script
+        fetch('/header.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('siteHeader').innerHTML = html;
+                const script = document.createElement('script');
+                script.src = 'frontend/js/header.js';
+                document.body.appendChild(script);
+            });
+    </script>
+</body>
+</html>

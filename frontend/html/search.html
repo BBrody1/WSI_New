@@ -12,16 +12,14 @@
   <header class="bg-white border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <a href="index.html" class="flex items-center">
-            <svg class="w-8 h-8 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd"
-                    d="M3 3a1 1 0 000 2v8a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 000-2H3zm3 2a1 1 0 011-1h8a1 1 0 110 2H7a1 1 0 01-1-1zm0 4a1 1 0 011-1h5a1 1 0 110 2H7a1 1 0 01-1-1z"
-                    clip-rule="evenodd" />
-            </svg>
-            <span class="font-semibold text-xl text-gray-800">
-              Work Safety Index
-            </span>
-          </a>
+  
+        <!-- Logo + Brand -->
+        <a href="index.html" class="flex items-center space-x-2">
+          <img src="/frontend/images/WSI-Logo.svg" alt="WSI Logo" class="h-10 w-auto">
+          <span class="font-semibold text-xl text-gray-800">Work Safety Index</span>
+        </a>
+  
+        <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center space-x-6">
           <a href="#" class="text-gray-600 hover:text-gray-900">Blog</a>
           <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
@@ -30,19 +28,37 @@
           <a href="#" class="text-gray-600 hover:text-gray-900">Login</a>
           <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Signup</a>
         </nav>
+  
+        <!-- Mobile Menu Button -->
         <div class="md:hidden">
           <button class="text-gray-600 hover:text-gray-900">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
           </button>
         </div>
+        
       </div>
     </div>
   </header>
 
   <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
     <div class="lg:flex lg:gap-x-8">
+        <!-- Mobile Filters Button -->
+        <button id="filterToggleBtn"
+        class="lg:hidden w-full mb-4 bg-gray-200 text-gray-800 py-2 px-4 rounded-md flex items-center justify-center gap-2 relative"
+        aria-expanded="false">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 4h18M4 8h16M6 12h12M9 16h6M11 20h2"/>
+  </svg>
+  <span>Filters</span>
+  <span id="mobileFilterCount" class="text-gray-600"></span>
+  <span id="mobileClearFilters"
+        class="hidden ml-2 text-gray-500 hover:text-gray-700 text-sm font-bold cursor-pointer">×</span>
+</button>
       <!-- ░░ Sidebar / Filters ░░ -->
-      <aside class="lg:w-1/4 space-y-6 mb-8 lg:mb-0 h-fit">
+      <aside id="filtersPanel" class="hidden lg:block lg:w-1/4 space-y-6 mb-8 lg:mb-0 h-fit">
         <div class="bg-white p-6 rounded-lg shadow">
           <!-- Filters heading -->
           <div class="flex items-center justify-between mb-4">
