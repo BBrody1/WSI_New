@@ -224,73 +224,119 @@ function buildIncidentsTable(years) {
 
 function buildTrendChart(years) {
     if (!years.length) return;
-    const yearsSorted = years.slice().sort((a, b) => a.year_filing_for - b.year_filing_for);
-    const labels = yearsSorted.map(r => r.year_filing_for);
+  
+    // 1) Sort ascending by year
+    const sorted = years.slice().sort((a, b) => a.year_filing_for - b.year_filing_for);
+  
+    // 2) Labels (the X-axis)
+    const labels = sorted.map(r => r.year_filing_for);
+  
+    // 3) Build two series per metric
     const trends = {
-        trir: yearsSorted.map(r => r.trir),
-        dart_rate: yearsSorted.map(r => r.dart_rate),
-        severity_rate: yearsSorted.map(r => r.severity_rate),
+      trir: {
+        company:  sorted.map(r => r.trir),
+        industry: sorted.map(r => r.industry_trir)
+      },
+      dart_rate: {
+        company:  sorted.map(r => r.dart_rate),
+        industry: sorted.map(r => r.industry_dart_rate)
+      },
+      severity_rate: {
+        company:  sorted.map(r => r.severity_rate),
+        industry: null   // we’ll skip industry for severity
+      }
     };
-    const trendNames = { trir: 'TRIR', dart_rate: 'DART Rate', severity_rate: 'Severity Rate' };
-    const trendColors = { trir: '#16a34a', dart_rate: '#2563eb', severity_rate: '#f59e42' };
-
-    let current = 'trir';
+  
+    // 4) Friendly labels + colors
+    const names = { trir: 'TRIR', dart_rate: 'DART Rate', severity_rate: 'Severity Rate' };
+    const colors = {
+      trir:          { company: '#16a34a', industry: '#a7f3d0' },
+      dart_rate:     { company: '#2563eb', industry: '#bfdbfe' },
+      severity_rate: { company: '#f59e42', industry: null }
+    };
+  
+    // 5) Chart.js setup
     const ctx = document.getElementById('trendChart').getContext('2d');
-    const chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels,
-            datasets: [{
-                label: trendNames[current],
-                data: trends[current],
-                borderColor: trendColors[current],
-                backgroundColor: 'rgba(0,0,0,0.08)',
+    let current = 'trir';  // default metric
+  
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          // company line
+          {
+            label: `Company ${names[current]}`,
+            data: trends[current].company,
+            borderColor: colors[current].company,
+            backgroundColor: 'rgba(0,0,0,0.05)',
+            tension: 0.3,
+            fill: false
+          },
+          // industry line (dashed)
+          ...(trends[current].industry
+            ? [{
+                label: `Industry ${names[current]}`,
+                data: trends[current].industry,
+                borderColor: colors[current].industry,
+                borderDash: [5,5],
                 tension: 0.3,
                 fill: false
-            }]
+              }]
+            : [])
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' },
+          tooltip: { mode: 'index', intersect: false }
         },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false },
-                tooltip: { mode: 'index', intersect: false }
-            },
-            scales: {
-                x: { title: { display: true, text: 'Year' } },
-                y: { title: { display: true, text: trendNames[current] }, beginAtZero: true }
-            }
+        scales: {
+          x: { title: { display: true, text: 'Year' } },
+          y: { title: { display: true, text: names[current] }, beginAtZero: true }
         }
+      }
     });
-
+  
+    // 6) Wire up your buttons to switch metric
     document.querySelectorAll('.trend-btn').forEach(btn => {
-        if (btn.dataset.trend === 'trir') {
-            btn.classList.remove('bg-gray-200', 'text-gray-800');
-            btn.classList.add('bg-blue-600', 'text-white');
-        } else {
-            btn.classList.remove('bg-blue-600', 'text-white');
-            btn.classList.add('bg-gray-200', 'text-gray-800');
-        }
-
-        btn.addEventListener('click', function() {
-            const trendKey = this.dataset.trend;
-            if (!trends[trendKey]) return;
-
-            document.querySelectorAll('.trend-btn').forEach(b => {
-                b.classList.remove('bg-blue-600', 'text-white');
-                b.classList.add('bg-gray-200', 'text-gray-800');
-            });
-            this.classList.remove('bg-gray-200', 'text-gray-800');
-            this.classList.add('bg-blue-600', 'text-white');
-
-            chartInstance.data.datasets[0].data = trends[trendKey];
-            chartInstance.data.datasets[0].label = trendNames[trendKey];
-            chartInstance.data.datasets[0].borderColor = trendColors[trendKey];
-            chartInstance.options.scales.y.title.text = trendNames[trendKey];
-            chartInstance.update();
-            current = trendKey;
-        });
+      btn.addEventListener('click', () => {
+        const metric = btn.dataset.trend;  // e.g. 'dart_rate'
+        if (!trends[metric]) return;
+  
+        // update button styles
+        document.querySelectorAll('.trend-btn')
+          .forEach(b => b.classList.replace('bg-blue-600','bg-gray-200') & b.classList.replace('text-white','text-gray-800'));
+        btn.classList.replace('bg-gray-200','bg-blue-600');
+        btn.classList.replace('text-gray-800','text-white');
+  
+        // update chart data & labels
+        const ds = [
+          {
+            label: `Company ${names[metric]}`,
+            data: trends[metric].company,
+            borderColor: colors[metric].company
+          },
+          ...(trends[metric].industry
+            ? [{
+                label: `Industry ${names[metric]}`,
+                data: trends[metric].industry,
+                borderColor: colors[metric].industry,
+                borderDash: [5,5]
+              }]
+            : [])
+        ];
+  
+        chart.data.labels = labels;
+        chart.data.datasets = ds;
+        chart.options.scales.y.title.text = names[metric];
+        chart.update();
+  
+        current = metric;
+      });
     });
-}
+  }
 
 /* ---------------- Helpers ---------------- */
 function fmtNum(v) {
@@ -298,3 +344,39 @@ function fmtNum(v) {
     if (typeof v === 'number') return Number.isInteger(v) ? v : v.toFixed(2);
     return v;
 }
+
+function augmentWith2024Estimate(years) {
+    const sorted = [...years].sort((a, b) => a.year_filing_for - b.year_filing_for);
+  
+    // collect year-over-year % changes
+    const trirDeltas = [];
+    const dartDeltas = [];
+    for (let i = 1; i < sorted.length; i++) {
+      const prev = sorted[i - 1], curr = sorted[i];
+      if (prev.industry_trir != null && curr.industry_trir != null) {
+        trirDeltas.push((curr.industry_trir - prev.industry_trir) / prev.industry_trir);
+      }
+      if (prev.industry_dart_rate != null && curr.industry_dart_rate != null) {
+        dartDeltas.push((curr.industry_dart_rate - prev.industry_dart_rate) / prev.industry_dart_rate);
+      }
+    }
+  
+    // if we have any deltas, compute the mean
+    if (trirDeltas.length && dartDeltas.length) {
+      const avgTrirDelta = trirDeltas.reduce((sum, d) => sum + d, 0) / trirDeltas.length;
+      const avgDartDelta = dartDeltas.reduce((sum, d) => sum + d, 0) / dartDeltas.length;
+      const last = sorted[sorted.length - 1];
+  
+      // only add an estimate if the latest year lacks industry rates
+      if (last.industry_trir == null || last.industry_dart_rate == null) {
+        years.push({
+          ...last,
+          year_filing_for:    last.year_filing_for + 1,
+          industry_trir:      last.industry_trir      * (1 + avgTrirDelta),
+          industry_dart_rate: last.industry_dart_rate * (1 + avgDartDelta),
+          is_estimate: true
+        });
+      }
+    }
+    return years;
+  }

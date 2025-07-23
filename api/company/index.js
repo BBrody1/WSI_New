@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
   try {
     // 🔄 Switch to search_mat
     const { data, error } = await supabase
-      .from('search_mat')
+      .from('search_mat_new')
       .select('*')
       .eq('ein', ein)
       .order('year_filing_for', { ascending: false });
@@ -62,10 +62,12 @@ module.exports = async (req, res) => {
         total_dafw_cases: row.total_dafw_cases,
         total_djtr_cases: row.total_djtr_cases,
         total_other_cases: row.total_other_cases,
-        dart_rate: row.dart_rate,
-        trir: row.trir,
+        dart_rate: row.company_dart_rate,
+        trir: row.company_trir,
         severity_rate: row.severity_rate,
-        safety_score: row.safety_score
+        safety_score: row.safety_score,
+        industry_trir: row.industry_trir,
+        industry_dart_rate: row.industry_dart_rate,
       }))
     });
 
