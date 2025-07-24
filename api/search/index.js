@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
        safety_score,
        state`,
       { count: 'exact' }
-    ) .eq('is_latest', true);;
+    ) .eq('is_latest', true);
 
     // Fuzzy search by company name
     let searchTerm = '';
@@ -64,8 +64,15 @@ module.exports = async (req, res) => {
         }
     }
 
-    if (industry) {
-        query = query.ilike('naics_code', `${industry}%`);
+        const industries = Array.isArray(req.query.industry)
+        ? req.query.industry
+        : req.query.industry
+        ? [req.query.industry]
+        : [];
+    
+    if (industries.length) {
+        const orFilters = industries.map(code => `naics_code.ilike.${code}%`).join(',');
+        query = query.or(orFilters);
     }
 
     if (employeesMin) {
@@ -95,13 +102,15 @@ if (req.query.safetyMax) query = query.lte('safety_score', parseFloat(req.query.
     if (sortBy && sortBy !== 'relevance') {
         const [sortColumn, sortDirection] = sortBy.split('.');
         if (sortColumn && (sortDirection === 'asc' || sortDirection === 'desc')) {
-            query = query.order(sortColumn, { ascending: sortDirection === 'asc' });
+          query = query.order(sortColumn, { ascending: sortDirection === 'asc' });
         } else {
-            query = query.order('safety_score', { ascending: false });
+          query = query.order('safety_score', { ascending: false });
         }
-    } else {
-        // Default sort: most recent data first
-        query = query.order('year_filing_for', { ascending: false });
+      } else {
+            // relevance → first non-null employees, then highest employees, then newest year
+            query = query
+            .order('total_employees', { ascending: false, nullsFirst: false })
+            .order('year_filing_for', { ascending: false });
     }
 
     query = query.limit(parseInt(limit)).range(

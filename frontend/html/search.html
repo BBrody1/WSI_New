@@ -1,231 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work Safety Index - Search</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="frontend/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work Safety Index - Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="frontend/style.css" />
 </head>
+
 <body class="bg-gray-100 font-sans">
-  <!-- ░░ Header ░░ -->
-  <header class="bg-white border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-  
-        <!-- Logo + Brand -->
-        <a href="index.html" class="flex items-center space-x-2">
-          <img src="/frontend/images/WSI-Logo.svg" alt="WSI Logo" class="h-10 w-auto">
-          <span class="font-semibold text-xl text-gray-800">Work Safety Index</span>
-        </a>
-  
-        <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center space-x-6">
-          <a href="#" class="text-gray-600 hover:text-gray-900">Blog</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Upgrade</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Login</a>
-          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Signup</a>
-        </nav>
-  
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden">
-          <button class="text-gray-600 hover:text-gray-900">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-            </svg>
-          </button>
-        </div>
-        
-      </div>
-    </div>
-  </header>
+    <!-- ░░ Header ░░ -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
 
-  <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <div class="lg:flex lg:gap-x-8">
-        <!-- Mobile Filters Button -->
-        <button id="filterToggleBtn"
-        class="lg:hidden w-full mb-4 bg-gray-200 text-gray-800 py-2 px-4 rounded-md flex items-center justify-center gap-2 relative"
-        aria-expanded="false">
-  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M3 4h18M4 8h16M6 12h12M9 16h6M11 20h2"/>
-  </svg>
-  <span>Filters</span>
-  <span id="mobileFilterCount" class="text-gray-600"></span>
-  <span id="mobileClearFilters"
-        class="hidden ml-2 text-gray-500 hover:text-gray-700 text-sm font-bold cursor-pointer">×</span>
-</button>
-      <!-- ░░ Sidebar / Filters ░░ -->
-      <aside id="filtersPanel" class="hidden lg:block lg:w-1/4 space-y-6 mb-8 lg:mb-0 h-fit">
-        <div class="bg-white p-6 rounded-lg shadow">
-          <!-- Filters heading -->
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-semibold text-gray-800 flex items-center">
-              <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"/></svg>
-              Filters
-            </h2>
-          </div>
+                <!-- Logo + Brand -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <img src="/frontend/images/WSI-Logo.svg" alt="WSI Logo" class="h-10 w-auto">
+                    <span class="font-semibold text-xl text-gray-800">Work Safety Index</span>
+                </a>
 
-          <button id="clearFiltersButton"
-                  class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-md text-sm mb-6">
-            Clear&nbsp;(0)
-          </button>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Blog</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Upgrade</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Login</a>
+                    <a href="#"
+                        class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Signup</a>
+                </nav>
 
-          <!-- Data Availability -->
-          <div class="mb-6">
-            <h3 class="text-sm font-semibold text-gray-700 mb-3">Data Availability</h3>
-
-            <label class="flex items-center space-x-2 text-gray-700 text-sm mb-2">
-              <input id="filterMostRecentYear" type="checkbox"
-                     class="filter-checkbox form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded"
-                     checked />
-              <span>Most Recent Year</span>
-            </label>
-
-            <label class="flex items-center space-x-2 text-gray-700 text-sm">
-              <input id="filterIncidentsDetails" type="checkbox"
-                     class="filter-checkbox form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded" />
-              <span>Incidents Details</span>
-            </label>
-          </div>
-
-          <!-- Company Info -->
-          <div class="mb-6 border-t border-gray-200 pt-4">
-            <button id="companyInfoToggle"
-                    class="collapsible-trigger flex justify-between items-center w-full text-left py-1">
-              <span class="text-sm font-semibold text-gray-700">Company Info</span>
-              <svg id="companyInfoArrow"
-                   class="w-4 h-4 text-gray-500 transform transition-transform duration-200"
-                   fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-
-            <div id="companyInfoContent" class="mt-3 space-y-4 hidden">
-              <!-- Industry -->
-              <div>
-                <label for="filterIndustry" class="block text-xs font-medium text-gray-500 mb-1">
-                  Industry&nbsp;(NAICS&nbsp;Sector)
-                </label>
-                <select id="filterIndustry"
-                        class="filter-input form-select block w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <option value="">All Industries</option>
-                </select>
-              </div>
-
-              <!-- Employees range - stacked on mobile -->
-              <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">
-                  Employees&nbsp;(Annual&nbsp;Average)
-                </label>
-                <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-                  <input id="filterEmployeesMin" type="number" placeholder="Min"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <input id="filterEmployeesMax" type="number" placeholder="Max"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
                 </div>
-              </div>
+
             </div>
-          </div>
+        </div>
+    </header>
 
-          <!-- Safety Score -->
-          <div class="mb-6 border-t border-gray-200 pt-4">
-            <button id="safetyToggle"
-                    class="collapsible-trigger flex justify-between items-center w-full text-left py-1" aria-expanded="true">
-              <span class="text-sm font-semibold text-gray-700">Safety Score</span>
-              <svg id="safetyArrow"
-              class="w-4 h-4 text-gray-500 transform rotate-180 transition-transform duration-200"
-              fill="none"
-                   fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="lg:flex lg:gap-x-8">
+            <!-- Mobile Filters Button -->
+            <button id="filterToggleBtn"
+                class="lg:hidden w-full mb-4 bg-gray-200 text-gray-800 py-2 px-4 rounded-md flex items-center justify-center gap-2 relative"
+                aria-expanded="false">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 4h18M4 8h16M6 12h12M9 16h6M11 20h2" />
+                </svg>
+                <span>Filters</span>
+                <span id="mobileFilterCount" class="text-gray-600"></span>
+                <span id="mobileClearFilters"
+                    class="hidden ml-2 text-gray-500 hover:text-gray-700 text-sm font-bold cursor-pointer">×</span>
             </button>
+            
+            <!-- Sidebar Container -->
+            <div id="sidebar-container">
+                <!-- Sidebar HTML will be loaded here by search.js -->
+            </div>
 
-            <div id="safetyContent" class="mt-3 space-y-4">
-              <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">
-                  Score&nbsp;Range&nbsp;(0-100)
-                </label>
-                <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-                  <input id="filterSafetyMin" type="number" min="0" max="100" placeholder="Min"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <input id="filterSafetyMax" type="number" min="0" max="100" placeholder="Max"
-                         class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
+            <!-- ░░ Main results column ░░ -->
+            <main class="lg:w-3/4 space-y-6">
+                <!-- Search bar -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input id="searchInput" type="search"
+                        class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md bg-white placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="Search company or establishment name..." />
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Location -->
-          <div class="border-t border-gray-200 pt-4">
-            <button id="locationToggle"
-                    class="collapsible-trigger flex justify-between items-center w-full text-left py-1">
-              <span class="text-sm font-semibold text-gray-700">Location</span>
-              <svg id="locationArrow"
-                   class="w-4 h-4 text-gray-500 transform transition-transform duration-200"
-                   fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
+                <!-- Sort + results-count -->
+                <div class="flex flex-col sm:flex-row justify-between items-center">
+                    <p class="text-sm text-gray-700 mb-2 sm:mb-0">
+                        Search results for <strong id="searchTermDisplay" class="text-gray-900"></strong>
+                        (<span id="resultsCount">0</span>)
+                    </p>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Sort by</span>
+                        <button data-sort="relevance"
+                            class="sort-button bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm font-medium">
+                            Relevance
+                        </button>
+                        <button data-sort="safety_score"
+                            class="sort-button bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1.5 rounded-md text-sm font-medium">
+                            SafetyScore
+                        </button>
+                        <button data-sort="year_filing_for.desc"
+                            class="sort-button bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1.5 rounded-md text-sm font-medium">
+                            Year
+                        </button>
+                    </div>
+                </div>
 
-            <div id="locationContent" class="mt-3 space-y-4 hidden">
-              <div>
-                <label for="filterState" class="block text-xs font-medium text-gray-500 mb-1">State</label>
-                <select id="filterState"
-                        class="filter-input form-select block w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-                  <option value="">All States</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="filterZip" class="block text-xs font-medium text-gray-500 mb-1">Zip&nbsp;Code</label>
-                <input id="filterZip" type="text" maxlength="5" placeholder="Enter Zip Code"
-                       class="filter-input form-input w-full text-sm border-gray-300 rounded-md shadow-sm focus:ring-blue-500">
-              </div>
-            </div>
-          </div>
-        </div><!-- /white card -->
-      </aside>
-
-      <!-- ░░ Main results column ░░ -->
-      <main class="lg:w-3/4 space-y-6">
-        <!-- Search bar -->
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/>
-            </svg>
-          </div>
-          <input id="searchInput" type="search"
-                 class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md bg-white placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                 placeholder="Search company or establishment name..." />
+                <!-- Results container -->
+                <div id="resultsContainer" class="space-y-4"></div>
+            </main>
         </div>
-
-        <!-- Sort + results-count -->
-        <div class="flex flex-col sm:flex-row justify-between items-center">
-          <p class="text-sm text-gray-700 mb-2 sm:mb-0">
-            Search results for <strong id="searchTermDisplay" class="text-gray-900"></strong>
-            (<span id="resultsCount">0</span>)
-          </p>
-          <div class="flex items-center space-x-2">
-            <span class="text-sm text-gray-600">Sort by</span>
-            <button data-sort="relevance"
-                    class="sort-button bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm font-medium">
-              Relevance
-            </button>
-            <button data-sort="safety_score"
-                    class="sort-button bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1.5 rounded-md text-sm font-medium">
-              SafetyScore
-            </button>
-            <button data-sort="year_filing_for.desc"
-                    class="sort-button bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1.5 rounded-md text-sm font-medium">
-              Year
-            </button>
-          </div>
-        </div>
-
-        <!-- Results container -->
-        <div id="resultsContainer" class="space-y-4"></div>
-      </main>
     </div>
-  </div>
 
-  <script src="frontend/js/search.js"></script>
+    <script src="frontend/components/sidebar.js"></script>
+    <script src="frontend/js/search.js"></script>
 </body>
+
 </html>

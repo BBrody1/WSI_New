@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improved Filters Sidebar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+
+<aside id="filtersPanel" class="w-72 space-y-6">
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <!-- Filters heading -->
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-semibold text-gray-900 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                </svg>
+                Filters
+            </h2>
+        </div>
+
+        <button id="clearFiltersButton"
+            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 px-4 rounded-lg text-sm font-medium mb-6 transition-colors">
+            Clear (0)
+        </button>
+
+        <!-- Data Availability -->
+        <div class="mb-8">
+            <h3 class="text-sm font-semibold text-gray-900 mb-4">Data Availability</h3>
+
+            <label class="flex items-center space-x-3 text-gray-700 text-sm mb-3 cursor-pointer">
+                <input id="filterMostRecentYear" type="checkbox"
+                    class="filter-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" checked />
+                <span>Most Recent Year</span>
+            </label>
+
+            <label class="flex items-center space-x-3 text-gray-700 text-sm cursor-pointer">
+                <input id="filterIncidentsDetails" type="checkbox"
+                    class="filter-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                <span>Incidents Details</span>
+            </label>
+        </div>
+
+        <!-- Industries Section -->
+        <div class="mb-8 border-t border-gray-200 pt-6">
+            <h3 class="text-sm font-semibold text-gray-900 mb-4">Industries</h3>
+            
+            <!-- Breadcrumb navigation -->
+            <div id="naicsBreadcrumb" class="mb-4 hidden">
+                <div class="flex items-center text-xs text-gray-500">
+                    <button id="naicsBackBtn" class="text-blue-600 hover:text-blue-800 font-medium">← Back</button>
+                    <span class="mx-2">/</span>
+                    <span id="naicsCurrentLevel" class="font-medium"></span>
+                </div>
+            </div>
+
+            <!-- Industry drill-down list -->
+            <div class="mb-4">
+                <ul id="naicsDrillList" class="space-y-2 max-h-48 overflow-auto">
+                    <!-- JS will populate industry options here -->
+                </ul>
+            </div>
+
+            <!-- Selected industry chips -->
+            <div id="naicsChipsContainer" class="flex flex-wrap gap-2">
+                <!-- JS will render selected chips here -->
+            </div>
+        </div>
+
+        <!-- Employee Range -->
+        <div class="mb-8 border-t border-gray-200 pt-6">
+            <label class="block text-sm font-semibold text-gray-900 mb-4">
+                Employees (Annual Average)
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+                <input id="filterEmployeesMin" type="number" placeholder="Min"
+                    class="filter-input px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <input id="filterEmployeesMax" type="number" placeholder="Max"
+                    class="filter-input px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
+
+        <!-- Safety Score -->
+        <div class="mb-8 border-t border-gray-200 pt-6">
+            <label class="block text-sm font-semibold text-gray-900 mb-4">
+                Safety Score (0-100)
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+                <input id="filterSafetyMin" type="number" min="0" max="100" placeholder="Min"
+                    class="filter-input px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <input id="filterSafetyMax" type="number" min="0" max="100" placeholder="Max"
+                    class="filter-input px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
+
+        <!-- Location -->
+        <div class="border-t border-gray-200 pt-6">
+            <h3 class="text-sm font-semibold text-gray-900 mb-4">Location</h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="filterState" class="block text-xs font-medium text-gray-600 mb-2">State</label>
+                    <select id="filterState"
+                        class="filter-input w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All States</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filterZip" class="block text-xs font-medium text-gray-600 mb-2">Zip Code</label>
+                    <input id="filterZip" type="text" maxlength="5" placeholder="Enter Zip Code"
+                        class="filter-input w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>

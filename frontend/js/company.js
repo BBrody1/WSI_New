@@ -10,6 +10,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loadingDiv = document.getElementById('companyLoading');
     const profileDiv = document.getElementById('companyProfile');
     const errorDiv = document.getElementById('companyError');
+    // Back button behavior
+const backLink = document.getElementById('backToResults');
+if (backLink) {
+  const stored = sessionStorage.getItem('lastSearchUrl');
+  const fromSearch =
+    document.referrer && /\/search/i.test(new URL(document.referrer).pathname);
+
+  // Prefer the stored URL, then referrer, then default /search
+  const target = stored || (fromSearch ? document.referrer : '/search');
+  backLink.setAttribute('href', target);
+
+  backLink.addEventListener('click', (e) => {
+    // If we have real history to go back to, use it (keeps scroll pos, etc.)
+    if (fromSearch && window.history.length > 1) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
+}
 
     if (!ein) {
         loadingDiv.classList.add('hidden');
@@ -153,7 +172,7 @@ async function loadEstablishmentsSidebar(ein, totalCount) {
         <li class="text-center text-sm text-gray-600 mt-2">
           Showing ${locations.length} of ${totalCount} locations.
           <a
-            href="/locations?ein=${encodeURIComponent(ein)}"
+            href="/locationsAll?ein=${encodeURIComponent(ein)}"
             class="underline text-blue-600 ml-1"
           >
             View all
