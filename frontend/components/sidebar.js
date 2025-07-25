@@ -98,13 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       function updateBreadcrumb() {
-          if (naicsHierarchy.length === 0) {
-              naicsBreadcrumb.classList.add('hidden');
-          } else {
-              naicsBreadcrumb.classList.remove('hidden');
-              const current = naicsHierarchy[naicsHierarchy.length - 1];
-              naicsCurrentLevel.textContent = `${current.code} - ${current.description}`;
-          }
+        if (naicsHierarchy.length === 0) {
+          naicsBreadcrumb.classList.add('hidden');
+        } else {
+          naicsBreadcrumb.classList.remove('hidden');
+          const current = naicsHierarchy[naicsHierarchy.length - 1];
+          naicsCurrentLevel.textContent =
+            current.code === '3'
+              ? current.description                      
+              : `${current.code} – ${current.description}`; 
+        }
       }
 
       function renderNaicsOptions() {
@@ -120,7 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
               const button = document.createElement('button');
               button.className = 'text-left flex-1 text-sm font-medium text-gray-900 group-hover:text-blue-700';
-              button.textContent = `${option.code} – ${option.description}`;
+                        const label = option.code === '3'
+            ? option.description
+            : `${option.code} - ${option.description}`;
+          button.textContent = label;
               button.onclick = () => navigateToNaics(option);
 
               const actions = document.createElement('div');
